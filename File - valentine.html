@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine 💕</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Comic Sans MS', cursive;
+  overflow: hidden;
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255,0,100,0.4);
+}
+
+h1 {
+  color: hotpink;
+}
+
+button {
+  padding: 12px 24px;
+  margin: 10px;
+  border: none;
+  border-radius: 25px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+#yes {
+  background: hotpink;
+  color: white;
+}
+
+#no {
+  background: lightgray;
+}
+
+#start {
+  background: #ff4081;
+  color: white;
+}
+
+.confetti {
+  position: fixed;
+  width: 8px;
+  height: 14px;
+  animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music">
+  <source src="Lord Huron - The Night We Met (Official Audio).mp3" type="audio/mpeg">
+</audio>
+</audio>
+
+<div class="card">
+  <h1>💌 Will you be my Valentine?</h1>
+
+  <button id="start" onclick="startMusic()">🎶 Tap to start music</button>
+
+  <br><br>
+
+  <button id="yes" onclick="yesClick()">Yes 💖</button>
+  <button id="no" onclick="noClick()">No 💔</button>
+
+  <p id="msg"></p>
+</div>
+
+<script>
+let musicReady = false;
+
+function startMusic() {
+  document.getElementById("music").play();
+  musicReady = true;
+  document.getElementById("start").innerHTML = "🎵 Music is on";
+}
+
+function yesClick() {
+  if(!musicReady){
+    alert("Tap the music button first 🎶");
+    return;
+  }
+
+  document.getElementById("msg").innerHTML =
+  "You just made me the happiest person 🥹💗";
+
+  document.getElementById("no").style.display = "none";
+
+  for(let i=0;i<120;i++){
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random()*100 + "vw";
+    c.style.background =
+      `hsl(${Math.random()*360},100%,60%)`;
+    c.style.animationDuration =
+      Math.random()*2 + 2 + "s";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),3000);
+  }
+}
+
+function noClick() {
+  const no = document.getElementById("no");
+  no.style.position = "absolute";
+  no.style.top = Math.random()*80 + "%";
+  no.style.left = Math.random()*80 + "%";
+}
+</script>
+
+</body>
+</html>
